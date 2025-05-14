@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Medicine Reminder App</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="top-panel">
+                <button class="toggle">🍔</button>
+                <button class="add">➕</button>
+            </div>
+            <div class="calendar" id="calendar">
+                
+            </div>
+            <h5 id="today-date">Today</h5>
+        </header>
+        <div class="daily-review">
+            Upcoming Schedule
+        </div>
+        <div class="pill-container" id="pill-container">
+            
+        </div>
+        <section class="content">
+            <div class="content-main">
+                <img src="./assets/img/undraw_doctor_kw5l.svg" alt="" class="hero">
+                <h2>Monitor your med schedule</h2>
+                <p>View your daily schedule and mark your meds when taken</p>
+                <button class="btn-pink" id="AddFirstMed">Add A Medicine</button>
+            </div>
+            <div class="content-inner">
+                <div class="timeline">
+                    <time>
+                        8:20 AM
+                    </time>
+                    <div class="timeline-content">
+                        <div class="top">
+                            <div class="icons">
+                                <span class="pill"></span>
+                            </div>
+                            <div class="text">
+                                <h2>Sergel</h2>
+                                <span>20 mg, Take 1</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="icons">
+                                <span class="tablet"></span>
+                            </div>
+                            <div class="text">
+                                <h2>Dribbble</h2>
+                                <span>120 mg, Take 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <time>
+                        8:20 AM
+                    </time>
+                    <div class="timeline-content">
+                        <div class="top">
+                            <div class="icons">
+                                <span class="tablet blue"></span>
+                            </div>
+                            <div class="text">
+                                <h2>Sergel</h2>
+                                <span>20 mg, Take 1</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="icons">
+                                <span class="pill"></span>
+                            </div>
+                            <div class="text">
+                                <h2>Dribbble</h2>
+                                <span>120 mg, Take 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="icon">
+                <a href="#!" class="active">
+                    <i class="home"></i>
+                    Home
+                </a>
+            </div>
+            <a href="#!">
+                <i class="stat"></i>
+            </a>
+            <a href="#!">
+                <i class="sched"></i>
+            </a>
+            <a href="#!">
+                <i class="user"></i>
+            </a>
+        </footer>
+    </div>
+
+    <div class="add-pill-container">
+        <div class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <h1>Add Pill</h1>
+        <form id="addPlanForm">
+            <div class="section-title">Pill Name</div>
+            <div class="input-group">
+                <i class="fas fa-pills"></i>
+                <input type="text" id="pillsName" placeholder="Enter Pill's Name" required>
+            </div>
+            <div class="section-title">Amount & Frequency</div>
+            <div class="amount-group">
+                <div class="input-group">
+                    <i class="fas fa-pills"></i>
+                    <select id="amount" required>
+                        <option value="" disabled selected>Select Amount</option>
+                        <option value="1">1 Pill</option>
+                        <option value="2">2 Pills</option>
+                        <option value="3">3 Pills</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <select id="duration" required>
+                        <option value="" disabled selected>Select Frequency</option>
+                        <option value="daily">Daily</option>
+                        <option value="alternative">Alternative</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section-title">Food & Pills</div>
+            <div class="food-pills-group">
+                <label class="option">
+                    <input type="radio" name="foodPills" value="with food">
+                    <i class="fas fa-utensils"></i>
+                    <span>With Food</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="foodPills" value="before food">
+                    <i class="fas fa-utensils"></i>
+                    <span>Before Food</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="foodPills" value="after food">
+                    <i class="fas fa-utensils"></i>
+                    <span>After Food</span>
+                </label>
+            </div>
+            
+            <div class="section-title">Select Container</div>
+            <div class="cabin-group">
+                <label class="option">
+                    <input type="radio" name="cabins" value="1" required>
+                    <i class="fas fa-box-open"></i>
+                    <span>Container 1</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="cabins" value="2" required>
+                    <i class="fas fa-box-open"></i>
+                    <span>Container 2</span>
+                </label>
+                <label class="option">
+                    <input type="radio" name="cabins" value="3" required>
+                    <i class="fas fa-box-open"></i>
+                    <span>Container 3</span>
+                </label>
+            </div>
+
+            <div class="section-title">Notifications</div>
+            <div id="notificationContainer">
+                <!-- Notification fields will be added here dynamically -->
+            </div>
+            <button type="submit" class="done-button">Done</button>
+        </form>
+    </div>
+        
+
+    <script src="js/script.js"></script>
+</body>
+</html>
